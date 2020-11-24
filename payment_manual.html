@@ -12,23 +12,26 @@
         <div id="Basic_window">
             <div class="container text-center" style="font-weight: bolder;">
                 <div class="row">
-                    <div id="Scan_type" class="col" style="font-size: 64px; font-weight: bolder;">placeholder</div>
+                    <!-- payment_scan과 동일하게 이전 선택에 따라서 문구가 달라짐-->
+                    <div id="Scan_type" class="col" style="font-size: 64px; font-weight: bolder;">Placeholder_Manual_Name</div>
                 </div>
             </div>
             
             <div class="container" style="margin-top: 5%;">
                 <div class="row">
-                    <p style="font-size: 48px;">T 맴버십 바코드 하단의<br>번호를 입력해 주세요</p>
+                    <!-- 이전 선택에 따라서 문구가 달라짐 -->
+                    <p style="font-size: 48px;">Placeholder<br>Manual_This_Pls</p>
                 </div>
                 <div class="row align-items-end">
                     <div class="col-8"><input type="number" class="form-control" id="Num_input" style="font-size: 36px; height: 100px;"></div>
-                    <!--- 모달 활성화 용 버튼 -->>
-                    <div class="col-4"><button type="button" data-toggle="modal" data-target="#Payment_waiting" class="Gong_color p-3 w-75">
+                    <!--- 모달 활성화 용 버튼 -->
+                    <div class="col-4"><button type="button" data-toggle="modal" data-target="#Payment_waiting" class="Gong_color p-3 ml-2 w-100">
                         사용</button>
                     </div>
                 </div>
             </div>
 
+            <!-- JS를 통한 키패드 구현 -->
             <div class="container" style="margin-top: 20%;">
                 <div class="row mb-5">
                     <div class="col"><button type="button" class="Numpad w-100 h-100">1</button></div>
@@ -55,7 +58,7 @@
             <div class="container text-center" style="margin-top: 20%;">
                 <div class="row" id="">
                     <div class="col">
-                        <button type="button" name="Manual_cancel" id="" class="Destruct_color p-3 w-100 h-100">
+                        <button type="button" onclick="document.location='payment_selection.html'" class="Destruct_color p-3 w-100 h-100">
                         취소</button>
                     </div>
                 </div>
