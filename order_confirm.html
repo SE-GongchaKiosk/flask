@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <title>주문확인</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="flexbox.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<<<<<<< HEAD
+    <script type="text/javascript">
+    function fnCalCount(type,ths){
+        var $input = $(ths).parents("div").find("input[name='pop_out']");
+        var tCount = Number($input.val());
+        
+        if(type=="p"){
+            $input.val(Number(tCount)+1);
+        }
+        else{
+            $input.val(Number(tCount)-1);
+        }
+    }
+    </script>
+=======
+>>>>>>> c764e0735648098c47fbad44e000686bdf835f37
+</head>
+<body>
+    <div class="container border">
+        <div class="container border">
+            <p style="font-size: xx-large; font-weight: bolder; color: #c30e2e;">01. 주문확인
+            </p>
+            <p style="color: gray;">주문내역을 확인해주세요</p>
+        </div>
+<<<<<<< HEAD
+        <!-- 주문 정보 표시될 부분. 단위: container-->
+=======
+        <!-- 주문 정보 표시될 부분. 단위: container. 주문 음료 종류에 따라 container늘어나도록 함수 구현.-->
+>>>>>>> c764e0735648098c47fbad44e000686bdf835f37
+        <div class="container border">
+            <div class="row border">
+                <div class="col-sm-2 border">
+                    <img src="http://www.gong-cha.co.kr/uploads/product/20190514/367VNGtpSPCH1ABo_20190514.png" alt="타로밀크티" height="150px" width="150px">
+                </div>
+                <div class="col-sm-4 border">
+<<<<<<< HEAD
+                    <p style="font-size: xx-large; color: #c30e2e; font-weight: bold;">타로밀크티 + 펄(L)</p>
+                    <p style="font-weight: bold; font-size: x-large;">4,200원</p>
+                </div>
+               
+                <div class="col-sm-1 border">
+                    <button type="button" class="fa fa-minus-square" onclick="fnCalCount('m',this);" style="color: #c30e2e; font-size: 50px;margin-left: 10px; margin-top: 50px; border: none; background-color: white;"></button>
+                </div>
+                <div class="col-sm-1 border" style="font-weight: bold; text-align: center; font-size: 30px; margin-top: 50px;">
+                    <input type="text" name="pop_out" value = "0" readonly ="readonly" style="border: none; ">
+                </div>
+                <div class="col-sm-1 border">
+                    <button type="button" class="fa fa-plus-square" onclick="fnCalCount('p',this);" style="color: #c30e2e; font-size: 50px;margin-left: 10px; margin-top: 50px; border: none; background-color: white;"></button>
+                </div>
+                <div class="col-sm-3 border">
+                    <button class="btn btn-block" onclick.href="" style="background-color: #c30e2e; color: white; font-weight: bold; font-size: 30px; margin-top: 50px; border-radius:10px">수정</button>
+=======
+                    <!-- DB에서 받아올 수 있는 부분-->
+                    <p style="font-size: xx-large; color: #c30e2e; font-weight: bold;">타로밀크티 + 펄(L)</p>
+                    <p style="font-weight: bold; font-size: x-large;">4,200원</p>
+                </div>
+                <div class="col-sm-1 border">
+                    <!--함수 적용-->
+                    <a href="#"><i class="fa fa-minus-square" style="color: #c30e2e; font-size: 50px;margin-left: 10px; margin-top: 50px;"></i></a>
+                </div>
+                <div class="col-sm-1 border" style="font-weight: bold; text-align: center; font-size: 30px; margin-top: 50px;">
+                    <!-- 01 default value,  아이콘과 함수 적용하여 증가 감소 표현-->
+                    01
+                </div>
+                <div class="col-sm-1 border">
+                    <a href="#"><i class="fa fa-plus-square" style="color: #c30e2e; font-size: 50px;margin-left: 10px; margin-top: 50px;"></i></a>
+                </div>
+                <div class="col-sm-3 border">
+                    <button class="btn btn-block" onclick="location.href='#'" style="background-color: #c30e2e; color: white; font-weight: bold; font-size: 30px; margin-top: 50px; border-radius:10px">수정</button>
+                </div>
+            </div>
+            <div class="row border">
+                <p style="font-size: large; color: #c30e2e; margin-left: 20px; margin-top:10px;">옵션: COLD(포장), Regular Ice, 50%</p>
+            </div>
+        </div>
+        <div class="container border">
+            <div class="row border">
+                <div class="col-sm-2 border">
+                    <img src="http://www.gong-cha.co.kr/uploads/product/20190514/367VNGtpSPCH1ABo_20190514.png" alt="타로밀크티" height="150px" width="150px">
+                </div>
+                <div class="col-sm-4 border">
+                    <p style="font-size: xx-large; color: #c30e2e; font-weight: bold;">타로밀크티 + 펄(L)</p>
+                    <p style="font-weight: bold; font-size: x-large;">4,200원</p>
+                </div>
+                <!-- 버튼으로 다시 구현 필요해보임.-->
+                <div class="col-sm-1 border">
+                    <a href="#"><button class="fa fa-minus-square" style="color: #c30e2e; font-size: 50px;margin-left: 10px; margin-top: 50px;"></button></a>
+                </div>
+                <div class="col-sm-1 border" style="font-weight: bold; text-align: center; font-size: 30px; margin-top: 50px;">
+                    01
+                </div>
+                <div class="col-sm-1 border">
+                    <a href="#"><i class="fa fa-plus-square" style="color: #c30e2e; font-size: 50px;margin-left: 10px; margin-top: 50px;"></i></a>
+                </div>
+                <div class="col-sm-3 border">
+                    <button class="btn btn-block" onclick="location.href='#'" style="background-color: #c30e2e; color: white; font-weight: bold; font-size: 30px; margin-top: 50px; border-radius:10px">수정</button>
+>>>>>>> c764e0735648098c47fbad44e000686bdf835f37
+                </div>
+            </div>
+            <div class="row border">
+                <p style="font-size: large; color: #c30e2e; margin-left: 20px; margin-top:10px;">옵션: COLD(포장), Regular Ice, 50%</p>
+            </div>
+        </div>
+<<<<<<< HEAD
+        
+=======
+>>>>>>> c764e0735648098c47fbad44e000686bdf835f37
+        
+
+        <!--Summary of TotalPayment-->
+        <div class="container border">
+            <div class="row border mt-3 mb-3">
+                <div class="col" style="font-size: 40px; font-weight: bolder; color: #c30e2e;">총 결제 금액</div>
+                <div class="col" style="font-size: 40px; font-weight: bolder; text-align: right; color: #c30e2e;">4,200 원</div>
+            </div>
+        </div>
+
+        <!--다시주문하기/결제하기-->
+        <div class="container border">
+            <div class="row border mt-3 mb-3">
+                <div class="col ml-5 mr-3" style="text-align: center;">
+                    <button class="btn btn-block" onclick="location.href='layout.html'" style="background-color:#c30e2e; border-radius: 10px; ">
+                        <p style="font-weight:bolder; font-size: x-large; text-align: center; color: white; margin-top:10px;">다시 주문하기</p></button>
+                </div>
+                <div class="col ml-5 mr-3" style="text-align: center;">
+                    <button class="btn btn-block" onclick="location.href='#'" style=" background-color:#c30e2e; border-radius: 10px;">
+                        <p style="font-weight:bolder; font-size: x-large; text-align: center; color: white; margin-top:10px;">결제하기</p></button>
+                </div>
+            </div>
+        </div>
+
+<<<<<<< HEAD
+
+        
+=======
+>>>>>>> c764e0735648098c47fbad44e000686bdf835f37
+</body>
+</html>
