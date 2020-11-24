@@ -37,7 +37,6 @@
                     <h6>카테고리</h6>
                     <div class="buttons category_buttons">
                         <button type="button" data-toggle="modal" data-target="#Modal_category_add" class="btn" id="category_add_btn">추가</button>
-                        <button type="button" data-toggle="modal" data-target="#Modal_category_modify" class="btn" id="category_modify_btn">수정</button>
                         <button type="button" data-toggle="modal" data-target="#Modal_category_remove" class="btn" id="category_remove_btn">삭제</button>
                     </div>
                     <select class="custom-select" id="category_select" size="10">
@@ -190,7 +189,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="ModalLabel"></h5>
+                  <h5 class="modal-title" id="ModalLabel">카테고리추가안내</h5>
                   <button type="button" class="close" id="close_btn" data-dismiss="modal" aria-label="close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -217,7 +216,6 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                  <input type="text" id="input_category_remove" class="hide">
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-dismiss="modal" id="cateogory_remove_ok_btn">OK</button>

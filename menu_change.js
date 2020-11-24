@@ -1,5 +1,5 @@
 let menu_data = [
-    {number:1, product_number:'abc00001', category:'시즌메뉴', name:'토피넛 밀크티+펄(라지)', price:5000, 
+    {number:1, product_number:'abc00001', category:'시즌메뉴', name:'토피넛 밀크티+펄(L)', price:5000, 
     ice:true, hot:true, topping_number:3, is_waiting:false, is_output_kitchen:true},
     {number:2, product_number:'abc00002', category:'시즌메뉴', name: '초코바른 토피넛 스무디(라지)', price:5500,
     ice:true, hot:true, topping_number:3, is_waiting:false, is_output_kitchen:true},
@@ -229,8 +229,8 @@ function isPossibleCategory(is_success){
         modal_title[4].innerText = "카테고리삭제안내" ;
         modal_body[4].innerText = "카테고리를 정말 삭제하시겠습니까? 카테고리에 있는 메뉴들은 모두 삭제됩니다.";
     }else{
-        modal_title[5].innerText = "카테고리삭제안내" ;
-        modal_body[5].innerText = "삭제할 카테고리를 선택해주세요.";
+        modal_title[4].innerText = "카테고리삭제안내" ;
+        modal_body[4].innerText = "삭제할 카테고리를 선택해주세요.";
     }
     
 };

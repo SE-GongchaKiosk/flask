@@ -49,77 +49,8 @@
                             <th scope="col">받은금액</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">0001</th>
-                            <td>202011180001</td>
-                            <td>5,000</td>
-                            <td>0</td>
-                            <td>5,000</td>
-                        </tr>
+                        <tbody  style="text-align: center;" id="payment_result_list">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -134,25 +65,40 @@
                             <th scope="col">총 받은금액</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <th scope="row">0059</th>
-                            <td>2020,111</td>
-                            <td>60,000</td>
-                            <td>5,000</td>
-                        </tr>
+                    <tbody style="text-align: center;" id="payment_result_all">
+                
                     </tbody>
                 </table>
             </div>
         </div>    
         <script>
-            $("#datepicker").datepicker();
-            $('#datepicker').datepicker('setDate', 'today');
-            $("#datepicker2").datepicker();
+            $("#datepicker")
+            .datepicker({
+                onSelect: function(dateText) {
+                    console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+                    //$(this).change();
+                    updatePaymentResultDom();
+                }
+            }).on("change", function() {
+                console.log("Got change event from field");
+            });
+            $('#datepicker').datepicker('setDate', 'today'); 
+            
+            $("#datepicker2")
+            .datepicker({
+                onSelect: function(dateText) {
+                    console.log("Selected date: " + dateText + "; input's current value: " + this.value);
+                    //$(this).change();
+                    updatePaymentResultDom();
+                }
+            }).on("change", function() {
+                console.log("Got change event from field");
+            });
             $('#datepicker2').datepicker('setDate', 'today');
           </script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+        <script src="payment_result.js"></script>
     </body>
     </html>

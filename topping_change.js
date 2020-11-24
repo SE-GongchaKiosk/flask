@@ -176,4 +176,4 @@ remove_ok_btn.addEventListener('click', ()=>{
         console.log(topping_data);
         updateToppings(topping_data)
     }
-})
+});
