@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>결제 수단 선택</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <link rel="stylesheet" href="../static/Payment.css">
+    </head>
+
+    <body>
+        <div id="Basic_window">
+            <div class="container text-center" style="font-weight: bolder;">
+                <div class="row">
+                    <div class="col" style="font-size: 64px; font-weight: bolder;">결제 수단 선택</div>
+                </div>
+            </div>
+            
+            <div class="container-* text-center" style="margin-top: 30%;">
+                <div class="row">
+                    <div class="col-1"></div>
+                    <div class="col Sel_Box_form" onclick="">공차 쿠폰</div>
+                    <div class="col-2"></div>
+                    <div class="col Sel_Box_form">통신사<br>할인</div>
+                    <div class="col-1"></div>
+                </div>
+                <div class="row" style="margin-top: 10%;">
+                    <div class="col-1"></div>
+                    <div class="col Sel_Box_form">기프티콘</div>
+                    <div class="col-2"></div>
+                    <div class="col Sel_Box_form">카드</div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+
+            <div class="container-fluid text-center" style="margin-top: 20%;">
+                <div class="row align-items-end">
+                    <div class="col-4 align-self-end">
+                        <button type="button" name="Selction_back" id="" class="Destruct_color p-3">
+                        뒤로가기
+                        </button></div>
+                    <div class="col-3"></div>
+                    <div class="col-4 Sel_Box_form">
+                        <p style="font-size: 48px;">결제하실 금액:</p>
+                        <!-- div 내부에 표시될 금액 = total_price - discount_price -->
+                        <div id="Payment"></div>
+                    </div>
+                    <div class="col-1"></div>
+                </div>
+            </div>
+        </div>
+
+        <script src="../static/Payment.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </body>
+</html>
