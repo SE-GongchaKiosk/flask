@@ -1,11 +1,12 @@
+
 from pymongo import MongoClient
 from flask import render_template, request, flash, redirect, url_for, Flask
-
 
 
 app = Flask(__name__)
 
 client = MongoClient('localhost', 27017) # mongoDB의 27017 포트로 들어감
+
 client = client.dbgongcha   # 'dbgongcha'라는 이름의 db 생성
 db = client.dbgongcha # 공처 db뭉치 가져오기
 
@@ -26,13 +27,13 @@ all_category = list(db.category.find({}))
 for i in all_category:
     print(i)
 
-
 ## HTML을 주는 부분
 @app.route('/')
 def home():
     return render_template('index.html')
 
 ## API 역할을 하는 부분
+
 @app.route('/menu/login')
 def manager_login():
     pass

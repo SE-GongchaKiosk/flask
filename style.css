@@ -117,7 +117,7 @@ h2{
     margin:20px;
 }
 .buttons{
-    margin-top:20px;
+    margin-top:30px;
 }
 .buttons button{
     color:#fff;
@@ -158,3 +158,14 @@ table tbody{
 /* .hide{
     opacity: 0;
 } */
+
+.menu_discription_form, .topping_discription_form{
+    border-radius: 10px;
+    padding:20px 20px;
+    background-color: #f5f5ed;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+#input_waiting, #input_kitchen, #input_ice, #input_hot, #input_topping_kitchen, #input_topping_waiting{
+    margin-left:5px;
+}

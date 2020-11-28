@@ -37,7 +37,6 @@
                     <h6>카테고리</h6>
                     <div class="buttons category_buttons">
                         <button type="button" data-toggle="modal" data-target="#Modal_category_add" class="btn" id="category_add_btn">추가</button>
-                        <button type="button" data-toggle="modal" data-target="#Modal_category_modify" class="btn" id="category_modify_btn">수정</button>
                         <button type="button" data-toggle="modal" data-target="#Modal_category_remove" class="btn" id="category_remove_btn">삭제</button>
                     </div>
                     <form method = 'POST'>
@@ -62,7 +61,7 @@
             <!--메뉴정보칸-->
             <div class="menu_discription col-6"> 
                 <h6>메뉴정보</h6>
-                <form id="menu_discription_form">
+                <form id="menu_discription_form" class="menu_discription_form">
                     <div class="form-group row">
                     <label for="input_category" class="col-sm-4 col-form-label col-form-label-sm">카테고리명</label>
                     <div class="col-sm-8">
@@ -91,13 +90,13 @@
                     </div>
                     <div class="form-group row">
                         <label for="input_kitchen" class="col-sm-4 col-form-label col-form-label-sm">주방출력</label>
-                        <div class="form-check col-sm-8">
+                        <div class="form-check col-sm-7">
                             <input class="form-check-input position-static" type="checkbox" id="input_kitchen" value="option1" aria-label="...">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="input_waiting" class="col-sm-4 col-form-label col-form-label-sm">준비중 표시</label>
-                        <div class="form-check col-sm-8">
+                        <div class="form-check col-sm-7">
                             <input class="form-check-input position-static" type="checkbox" id="input_waiting" value="option1" aria-label="...">
                         </div>
                     </div>
@@ -105,13 +104,13 @@
                     <div class="menu_discription_plus">
                         <div class="form-group row">
                             <label for="input_ice" class="col-sm-4 col-form-label col-form-label-sm">ICE</label>
-                            <div class="form-check col-sm-8">
+                            <div class="form-check col-sm-7">
                                 <input class="form-check-input position-static" type="checkbox" id="input_ice" value="option1" aria-label="...">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="input_hot" class="col-sm-4 col-form-label col-form-label-sm">HOT</label>
-                            <div class="form-check col-sm-8">
+                            <div class="form-check col-sm-7">
                                 <input class="form-check-input position-static" type="checkbox" id="input_hot" value="option1" aria-label="...">
                             </div>
                         </div>
@@ -201,7 +200,7 @@
             <div class="modal-dialog">
               <div class="modal-content">
                 <div class="modal-header">
-                  <h5 class="modal-title" id="ModalLabel"></h5>
+                  <h5 class="modal-title" id="ModalLabel">카테고리추가안내</h5>
                   <button type="button" class="close" id="close_btn" data-dismiss="modal" aria-label="close">
                     <span aria-hidden="true">&times;</span>
                   </button>
@@ -231,12 +230,6 @@
                   </button>
                 </div>
                 <div class="modal-body">
-                <p>삭제할 카테고리명을 입력해주세요.</p>
-                  <!-- 정보를 뷰에 넘겨주는 부분 -->
-              <form method="POST" action="/menu/delete_category">
-                  <p><input type="text" id="input_category_delete"name= 'delete_category' ><p>
-                  <input type="submit" value = '제출' id="input_category_delete" >
-              </form>
 
                 </div>
                 <div class="modal-footer">
