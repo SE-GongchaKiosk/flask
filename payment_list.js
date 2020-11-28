@@ -21,7 +21,7 @@ const input_discount_priceEl = document.getElementById('input_discount_price');
 const input_real_priceEl = document.getElementById('input_real_price');
 
 const payment_cancel_btn = document.getElementById('payment_cancel');
-const card_limit_time = document.getElementById('card_limit_time');
+const canel_ok_btn = document.getElementById('ok_btn');
 
 updatePaymentDom(payment_data); 
 
@@ -59,6 +59,7 @@ function updatePaymentDom(provided_data=payment_data){
     //clear main div
     tbodyEl.innerHTML = '';
     const selected_date_data= changeDate(provided_data); //날짜선택하여 날짜에 맞는 데이터 추출
+    removeDetailPayment();
     console.log(selected_date_data);
     selected_date_data.forEach(item=> {
         const element = document.createElement('tr');
@@ -97,8 +98,16 @@ function showDetailPayment(payment_data,receipt_number){
     input_discount_priceEl.innerHTML=`${detail_payment.discount_price}`;
     input_real_priceEl.innerHTML=`${detail_payment.real_price}`;
 
+};
 
-
+function removeDetailPayment(){
+    input_numberEl.innerHTML = ``;
+    input_receipt_numberEl.innerHTML = ``;
+    input_transaction_dateEl.innerHTML = ``;
+    input_productsEl.innerHTML=``;
+    input_total_priceEl.innerHTML=``;
+    input_discount_priceEl.innerHTML=``;
+    input_real_priceEl.innerHTML=``;
 
 };
 $(document.body).delegate("#example-table-1 tr", 'click', function() {
@@ -116,6 +125,17 @@ $(document.body).delegate("#example-table-1 tr", 'click', function() {
 });
 
 
+payment_cancel_btn.addEventListener('click', ()=>{
+    const remove_receipt_number =input_receipt_numberEl.innerText;
+
+    payment_data.forEach((item,index)=> {
+        if(item.receipt_number===remove_receipt_number){
+            payment_data.splice(index,1);
+        }
+    });
+    updatePaymentDom();
+    removeDetailPayment();
+});
 
 
 // $("#example-table-1 tr").click(function(){ 	

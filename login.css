@@ -59,3 +59,7 @@ body{
 .btn-primary:visited{
     background-color: var(--primary-color);
 }
+
+a:link {color:white;text-decoration: none;}
+a:visited {color: white; text-decoration: none;}
+a:hover { color: #999999; text-decoration: underline;}

@@ -27,11 +27,10 @@ function updateDom(menu_data){
     menu_data.forEach(item=> {
         const element = document.createElement('tr');
         element.innerHTML = 
-            `<th scope="row">${item.number}</th>
-            <td>${item.product_number}</td>
+            `<th scope="row" style="text-align:center">${item.number}</th>
             <td>${item.category}</td>
             <td>${item.name}</td>
-            <td>${formatMoney(item.price)}</td>`;
+            <td style="text-align:right">${formatMoney(item.price)}</td>`;
         tbodyEl.appendChild(element);
     });
 }
