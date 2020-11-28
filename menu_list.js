@@ -1,7 +1,7 @@
 const tbodyEl = document.getElementById('menu_tbody');
 
 let menu_data = [
-    {number:1, product_number:'abc00001', category:'시즌메뉴', name:'토피넛 밀크티+펄(라지)', price:5000},
+    {number:1, product_number:'abc00001', category:'시즌메뉴', name:'토피넛 밀크티+펄(L)', price:5000},
     {number:2, product_number:'abc00002', category:'시즌메뉴', name: '초코바른 토피넛 스무디(라지)', price:5500},
     {number:3, product_number:'abc00003', category:'시즌메뉴', name: '다크초코 밀크티+펄(라지)', price:4900},
     {number:4, product_number:'abc00004', category:'베스트 콤비네이션', name: '블랙 밀크티 + 펄(라지)', price:4500},
