@@ -47,11 +47,12 @@ def show_menu():
     return render_template('menu_change.html', all_menu = all_menu, all_category= all_category)
 
 # 메뉴 생성
-@app.route('/menu/add_category', methods=['POST', 'GET'])
-def add_category():
+@app.route('/menu/add_menu', methods=['POST', 'GET'])
+def add_menu():
     if request.method == 'POST':
-        category= request.form['add_category']
-        db.category.insert_one({'name': category} )
+        # category= request.form['add_menu']
+        print(category)
+        # db.category.insert_one({'name': category} )
         return redirect(url_for('show_menu'))
     else:
         error = '잘못된 시도입니다'
