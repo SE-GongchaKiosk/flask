@@ -31,7 +31,7 @@
         
         <h2>메뉴 등록/수정</h2>
         <div class="container d-flex">
-            <!--category와 menu 선택-->
+            <!--category와 menu 선택-->`
             <div class="category_menu col-5">
                 <div class="row d-flex flex-column">
                     <h6>카테고리</h6>
@@ -39,10 +39,20 @@
                         <button type="button" data-toggle="modal" data-target="#Modal_category_add" class="btn" id="category_add_btn">추가</button>
                         <button type="button" data-toggle="modal" data-target="#Modal_category_remove" class="btn" id="category_remove_btn">삭제</button>
                     </div>
+                    <form method = 'POST'>
                     <select class="custom-select" id="category_select" size="10">
+                      {% for i in all_category %}
+                      <option value="{{i.name}}">{{i.name}} </option>
+
+                     {% endfor %}
+                   </form>
                     </select>
+                
                     <h6>메뉴명</h6>
                     <select class="custom-select" id="menu_select" size="10">
+                        {% for i in all_menu %}
+                          <option value="{{i.number}}">{{i.name}}</option>
+                         {% endfor %}
                     </select>
                 </div>
             </div>
@@ -56,6 +66,7 @@
                     <label for="input_category" class="col-sm-4 col-form-label col-form-label-sm">카테고리명</label>
                     <div class="col-sm-8">
                         <select id="input_category" class="form-control form-control-sm bg-secondary">
+                          
                         </select>
                     </div>
                     </div>
@@ -196,7 +207,11 @@
                 </div>
                 <div class="modal-body">
                   <p>추가할 카테고리명을 입력해주세요.</p>
-                  <input type="text" id="input_category_add">
+                  <!-- 정보를 뷰에 넘겨주는 부분 -->
+              <form method="POST" action="/menu/add_category">
+                  <p><input type="text" id="input_category_add"name= 'add_category' ><p>
+                  <input type="submit" value = '제출' id="input_category_add" >
+              </form>
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-dismiss="modal" id="cateogory_add_ok_btn">OK</button>
@@ -204,7 +219,6 @@
               </div>
             </div>
         </div>
-
 
         <div class="modal fade" id="Modal_category_remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -216,6 +230,7 @@
                   </button>
                 </div>
                 <div class="modal-body">
+
                 </div>
                 <div class="modal-footer">
                   <button type="button" class="btn" data-dismiss="modal" id="cateogory_remove_ok_btn">OK</button>
@@ -229,5 +244,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="menu_change.js"></script>
+
+
+        
     </body>
     </html>
