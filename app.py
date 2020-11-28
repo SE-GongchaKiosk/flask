@@ -1,7 +1,7 @@
 
+
 from pymongo import MongoClient
 from flask import render_template, request, flash, redirect, url_for, Flask
-
 
 app = Flask(__name__)
 
@@ -32,7 +32,6 @@ for i in all_category:
 def home():
     return render_template('index.html')
 
-## API 역할을 하는 부분
 
 @app.route('/menu/login')
 def manager_login():
