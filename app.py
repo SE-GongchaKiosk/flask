@@ -18,61 +18,65 @@ def home():
 ## API 역할을 하는 부분
 @app.route('/order', methods=['GET', 'POST'])
 def make_order():
-    if request.method == 'POST':
-        order_menu = request.form['menu_give']  # [menu_name, menu_options, menu_count, menu_price]
-        order_price = request.form['price_give']  # total_price
+    if request.method == 'POST': # 주문 정보 저장히기
+        products = request.form['products_give']  # [[products, amount, per_price, *options], ...]
+        total_price = request.form['price_give']
 
         order_count = db.orderCount.find_one({}, {'_id': 0})
-        order_number = order_count['order_count']  # 주문 번호
+        number = order_count['order_count']  # *주문 번호
 
-        order_date = str(datetime.today().date())
-        order_time = datetime.today()  # 주문 날짜
+        order_date = str(datetime.today().date()) # 주문 날짜
 
-        order_state = False  # 주문 처리 상태
+        receipt_number =  #order_date + number # 영수증 번호 형식 수정 필요 (202011280001)
 
-        order = {'order_number': order_number, 'order_date': order_date, 'order_time': order_time, 'order_menu': order_menu,
-                 'order_price': order_price, 'order_state': order_state}
+        order = {'number': number, 'receipt_number': receipt_number, 'products': products,
+                 'total_price': total_price}
 
         db.order.insert_one(order)
 
         return jsonify({'result': 'success'})
 
-    elif request.method == 'GET':
+    elif request.method == 'GET': # 결제 화면에 total_price 값 뿌려주기 (optional)
         order_count = db.orderCount.find_one({}, {'_id': 0})
-        order_number = order_count['order_count']
+        number = order_count['order_count']
         order_date = str(datetime.today().date())
+        receipt_number =  #order_date + number
 
-        result = db.order.find_one({'$and': [{'order_number': order_number},{'order_date': order_date}]},
-            {'_id': 0, 'order_number': 0, 'order_date': 0, 'order_time': 0, 'order_menu': 0, 'order_state': 0})
+        result = db.order.find_one({'receipt_number': receipt_number}, {'_id': 0, 'number': 0, 'receipt_number': 0, 'products': 0})
 
-        return jsonify({'result': 'success', 'order_price': result})
+        return jsonify({'result': 'success', 'total_price': result})
 
 @app.route('/pay', methods=['GET', 'POST'])
 def pay_order():
-    if request.method == 'POST':
+    if request.method == 'POST': # 결제 정보 저장하기
         order_count = db.orderCount.find_one({}, {'_id': 0})
-        order_number = order_count['order_count']
+        number = order_count['order_count']
         order_date = str(datetime.today().date())
-        order_time = datetime.today()
+        receipt_number =  #order_date + number
 
-        discount_cost = request.form['discount_give']  # 할인 금액
-        pay_cost = request.form['pay_give']  # 결제 금액 (메뉴 가격 - 할인 금액)
+        transaction_date =  #날짜+시간
+        # order_date = str(datetime.today().date())
+        # order_time = datetime.today()
 
-        pay = {'order_number': order_number, 'order_date': order_date, 'order_time': order_time, 'discount_cost': discount_cost, 'pay_cost': pay_cost}
+        discount_price = request.form['discount_give']  # 할인 금액
+        real_price = request.form['real_give']  # 결제 금액 (메뉴 가격 - 할인 금액)
+
+        pay = {'receipt_number': receipt_number, 'transaction_date': transaction_date, 'discount_price': discount_price, 'real_price': real_price}
 
         db.pay.insert_one(pay)
 
         return jsonify({'result': 'success'})
 
-    elif request.method == 'GET':
+    elif request.method == 'GET': # 최종 결제 화면에 real_price 값 뿌려주기 (optional)
         order_count = db.orderCount.find_one({}, {'_id': 0})
-        order_number = order_count['order_count']
+        number = order_count['order_count']
         order_date = str(datetime.today().date())
+        receipt_number =  #order_date + number
 
-        result = db.pay.find_one({'$and': [{'order_number': order_number}, {'order_date': order_date}]},
-                                 {'_id': 0, 'order_number': 0, 'order_date': 0, 'order_time': 0, 'discount_cost': 0})
+        result = db.pay.find_one({'receipt_number': receipt_number},
+                                 {'_id': 0, 'receipt_number': 0, 'transaction_date': 0, 'discount_price': 0})
 
-        return jsonify({'result': 'success', 'pay_cost': result})
+        return jsonify({'result': 'success', 'real_price': result})
 
 @app.route('/finish', methods=['GET'])
 def finish_order():
@@ -86,102 +90,61 @@ def finish_order():
 
     return jsonify({'result': 'success', 'order_number': order_number})
 
+def make_payments_db(): # order DB + pay DB = payments DB 만들기
+    # 1. order DB에서 주문 정보 가져오기
+    order_db = list(db.order.find({}, {'_id': 0}))
+
+    for order in order_db:
+        number = order['number']
+        receipt_number = order['receipt_number']
+        order_state = False  # 주문 처리 상태
+        transaction_date = 0
+        products = order['products']
+        total_price = order['total_price']
+        discount_price = 0
+        real_price = 0
+
+        payments = {'number': number, 'receipt_number': receipt_number, 'order_state': order_state,
+                    'transaction_date': transaction_date, 'products': products, 'total_price': total_price,
+                    'discount_price': discount_price, 'real_price': real_price}
+        db.payments.insert_one(payments)
+
+    # 2. pay DB에서 결제 정보 가져오기
+    pay_db = list(db.pay.find({}, {'_id': 0}))
+
+    for pay in pay_db:
+        receipt_number = pay['receipt_number']
+        transaction_date = pay['transaction_date']
+        discount_price = pay['discount_price']
+        real_price = pay['real_price']
+
+        db.payments.update_one({'receipt_number': receipt_number}, {
+            '$set': {'transaction_date': transaction_date, 'discount_price': discount_price, 'real_price': real_price}})
+
 @app.route('/payments', methods=['GET', 'POST'])
 def manage_payments():
-    if request.method == 'POST':
-        order_date = request.form['date_give']
-
-        # 1. order DB에서 order_date에 해당하는 값 가져오기
-        order_db = list(db.order.find({'order_date': order_date}, {'_id': 0, 'order_state': 0}))
-
-        for order in order_db:
-            number = order['order_number']
-            time = order['order_time']
-            menu = order['order_menu']
-            price = order['order_price']
-            discount = 0
-            pay = 0
-
-            payments = {'order_number': number, 'order_time': time, 'order_menu': menu, 'order_price': price, 'discount_cost': discount,
-                        'pay_cost': pay}
-            db.payments.insert_one(payments)
-
-        # 2. pay DB에서 order_date에 해당하는 값 가져오기
-        pay_db = list(db.pay.find({'order_date': order_date}, {'_id': 0}))
-
-        for pay in pay_db:
-            number = pay['order_number']
-            discount = pay['discount_cost']
-            pay = pay['pay_cost']
-
-            db.payments.update_one({'order_number': number}, {'$set': {'discount_cost': discount, 'pay_cost': pay}})
+    if request.method == 'POST': #결제 취소 데이터 삭제하기
+        receipt_number = request.form['receipt_give']
+        db.payments.delete_one({'receipt_number': receipt_number})
 
         return jsonify({'result': 'success'})
 
-    elif request.method == 'GET':
-        # 1. payments DB에서 결제내역 리스트 읽어오기
-        result = list(db.payments.find({}, {'_id': 0}))
+    elif request.method == 'GET': # payments DB에서 주문결제 정보 불러오기
+        result = list(db.payments.find({}, {'_id': 0, 'order_state': 0}))
 
-        # 2. payments라는 키 값으로 결제내역 리스트 보내주기
-        return jsonify({'result': 'success', 'payments': result})
-
-@app.route('/sales', methods=['GET', 'POST'])
-def manage_sales():
-    if request.method == 'POST':
-        start_date = request.form['start_give']
-        end_date = request.form['end_give']
-
-        start_year = start_date[0]
-        start_month = start_date[1]
-        start_day = start_date[2]
-
-        end_year = end_date[0]
-        end_month = end_date[1]
-        end_day = end_date[2]
-
-        start = datetime(start_year, start_month, start_day)
-        end = datetime(end_year, end_month, end_day)
-
-        total_order = db.order.count_documents({'order_time': {'$gte': start, '$lt': end}})
-
-        orders = list(db.order.find({'order_time': {'$gte' : start, '$lt' : end}}))
-        total_price = 0
-        for order in orders:
-            order_price = order['order_price']
-            total_price += order_price
-
-        pays = list(db.pay.find({'order_time': {'$gte' : start, '$lt' : end}}))
-        total_discount = 0
-        total_pay = 0
-        for pay in pays:
-            discount_cost = pay['discount_cost']
-            pay_cost = pay['pay_cost']
-            total_discount += discount_cost
-            total_pay += pay_cost
-
-        sales = {'total_order': total_order, 'total_price': total_price, 'total_discount': total_discount, 'total_pay': total_pay}
-        db.sales.insert_one(sales)
-
-        return jsonify({'result': 'success'})
-
-    elif request.method == 'GET':
-        # 1. sales DB에서 매출내역 리스트 읽어오기
-        result = db.sales.find_one({}, {'_id': 0})
-
-        # 2. sales라는 키 값으로 결제내역 리스트 보내주기
-        return jsonify({'result': 'success', 'sales': result})
-
+        return jsonify({'result': 'success', 'payment_data': result})  #products > options 정보 추가된 것 어떻게 처리할지 생각 필요
 
 @app.route('/check', methods=['GET', 'POST'])
 def check_order():
-    if request.method == 'POST':
-        number_receive = request.form['number_give']
-        db.order.update_one({'order_number': number_receive}, {'$set': {'order_state': True}})
+    if request.method == 'POST': # 서빙이 끝난 주문의 처리 정보 수정하기
+        receipt_receive = request.form['receipt_give']
+        db.payments.update_one({'receipt_number': receipt_receive}, {'$set': {'order_state': True}})
 
         return jsonify({'result': 'success'})
 
-    elif request.method == 'GET':
-        result = list(db.order.find({'order_state': False}, {'_id': 0, 'order_date': 0, 'order_time': 0, 'order_price': 0, 'order_state': 0}))
+    elif request.method == 'GET': # 주방 화면에 주문 번호(number), 영수증 번호(receipt_number)와 주문정보(products) 보내주기
+        result = list(db.payments.find({'order_state': False}, {'_id': 0, 'receipt_number': 0, 'transaction_date': 0, 'total_price': 0,
+                                                                'discount_price': 0, 'real_price': 0, 'order_state': 0}))
 
         return jsonify({'result': 'success', 'order_list': result})
 
