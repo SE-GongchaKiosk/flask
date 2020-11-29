@@ -19,16 +19,16 @@
             <div class="container-* text-center" style="margin-top: 30%;">
                 <div class="row">
                     <div class="col-1"></div>
-                    <div class="col Sel_Box_form">공차 쿠폰</div>
+                    <button class="col Sel_Box_form" onclick="payment_type_set(0)">공차 쿠폰</button>
                     <div class="col-2"></div>
-                    <div class="col Sel_Box_form">통신사<br>할인</div>
+                    <button class="col Sel_Box_form" onclick="payment_type_set(1)">통신사<br>할인</button>
                     <div class="col-1"></div>
                 </div>
                 <div class="row" style="margin-top: 10%;">
                     <div class="col-1"></div>
-                    <div class="col Sel_Box_form">기프티콘</div>
+                    <button class="col Sel_Box_form" onclick="payment_type_set(2)">기프티콘</button>
                     <div class="col-2"></div>
-                    <div class="col Sel_Box_form">카드</div>
+                    <button class="col Sel_Box_form" onclick="location.href = './payment_credit.html'">카드</button>
                     <div class="col-1"></div>
                 </div>
             </div>
@@ -43,7 +43,7 @@
                     <div class="col-4 Sel_Box_form">
                         <p style="font-size: 48px;">결제하실 금액:</p>
                         <!-- div 내부에 표시될 금액 = total_price - discount_price -->
-                        <div id="Payment"></div>
+                        <div id="Payment">{{PAYMENT_DATA.get('real_price')}}</div>
                     </div>
                     <div class="col-1"></div>
                 </div>
@@ -54,5 +54,12 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="../static/Payment.js"></script>
+        <script>
+            if (localstorage.getItem('Is_Discount')) {
+                for (let i = 0; i < 2; i++) {
+                    document.getElementsByClassName('Sel_Box_form')[i].disabled = true;
+                }
+            }
+        </script>
     </body>
 </html>

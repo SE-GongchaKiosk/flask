@@ -28,13 +28,13 @@
                 <div class="row" id="Btn_pos">
                     <div class="col-1"></div>
                     <div class="col-4">
-                        <button type="button" onclick="document.location='payment_selection.html'" name="Selction_back" class="Destruct_color p-3 w-100">
+                        <button type="button" onclick="cancel()" name="Selction_back" class="Destruct_color p-3 w-100">
                         뒤로가기</button>
                     </div>
                     <div class="col-2"></div>
                     <div class="col-4">
                         <!-- 모달 활성화 용 버튼 -->
-                        <button type="button" data-toggle="modal" data-target="#Payment_waiting" class="Gong_color p-3 w-100">
+                    <button type="button" data-toggle="modal" data-target="#Payment_waiting" class="Gong_color p-3 w-100" onclick="Modal_set_timer()">
                         승인 요청</button>
                     </div>
                     <div class="col-1"></div>
@@ -61,18 +61,49 @@
                           </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #6D000E;">취소</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" style="background-color: #6D000E;" onclick="restart('Timer', '../static/timer_wttrans.gif');">취소</button>
                     </div>
                 </div>
             </div>
         </div>
 
         <!-- timer_wttrans.gif 삽입 위치 -->
-        <footer class="position-absolute" style="bottom: 5%; right: 5%;"><img src="../static/timer_wttrans.gif" style="height: 130px; width: 130px;"></footer>
+        <footer class="position-absolute" style="bottom: 5%; right: 5%;"><img id="Timer" src="../static/timer_wttrans.gif" style="height: 130px; width: 130px;"></footer>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="../static/Payment.js"></script>
+        <script>
+            var bIs_confirm = false
+            var nCount_success = 0;
+            var Modal_timer;
+            var Timeout_timer
+
+            document.addEventListener("DOMContentLoaded", function(){
+                Timeout_timer = setTimeout(() => {
+                    location.href = './payment_error.html'
+                }, 15000);
+            });
+
+            function Modal_set_timer() {
+                bIs_confirm = true;
+                clearTimeout(Timeout_timer)
+                Modal_timer = setTimeout(() => {
+                    location.href = './stamp_success.html'
+                }, 5000);
+            }
+
+            function restart(id,url) {
+                bIs_confirm = false
+                clearTimeout(Modal_timer)
+                var img = document.getElementById(id);
+                img.src = "";
+                img.src = url;
+                Timeout_timer = setTimeout(() => {
+                    location.href = './payment_error.html'
+                }, 15000);
+            }
+        </script>
     </body>
 </html>
