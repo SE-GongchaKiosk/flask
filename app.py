@@ -40,6 +40,19 @@ def manager_login():
     # return render_template('index.html', note=note)
 
 
+@app.route('/test', methods=['GET','POST'])
+def test():
+    if request.method == "POST":
+        
+        a = request.form['test_give']
+        print(a)
+        redirect('/')
+        return render_template('test.html')
+    else:
+        return render_template('test.html')
+
+
+
 @app.route('/menu', methods=['POST', 'GET'])
 def show_menu():
     all_menu = list(db.menu.find({}))
@@ -47,16 +60,33 @@ def show_menu():
     return render_template('menu_change.html', all_menu = all_menu, all_category= all_category)
 
 # 메뉴 생성
-@app.route('/menu/add_menu', methods=['POST', 'GET'])
+@app.route('/add_menu', methods=['POST'])
 def add_menu():
-    if request.method == 'POST':
-        # category= request.form['add_menu']
-        print(category)
+        category_receive = request.form['category_give']
+        menu_receive = request.form['menu_give']
+        price_receive = request.form['price_give']
+        kitchen_receive = request.form['kitchen_give']
+        waiting_receive = request.form['waiting_give']
+        ice_receive = request.form['ice_give']
+        hot_receive = request.form['hot_give']
+        topping_receive = request.form['topping_give']
+
+        menu = {
+                        "category"   : category_receive,
+                        "menu"   : menu_receive,
+                        "price"   : price_receive,
+                        "category"   : category_receive,
+                        "kitchen"   : kitchen_receive,
+                        "waiting"   : waiting_receive,
+                        "ice"   : ice_receive,
+                        "hot"   : hot_receive,
+                        "topping"   : topping_receive,
+        }
+        print(menu)
+        print("성공!")
+
         # db.category.insert_one({'name': category} )
-        return redirect(url_for('show_menu'))
-    else:
-        error = '잘못된 시도입니다'
-    return render_template('menu_change.html', error = error)
+        return jsonify({"result":"success"})
 
 # 메뉴 삭제
 @app.route('/menu/delete_category', methods=['POST'])

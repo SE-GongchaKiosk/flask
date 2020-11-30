@@ -6,7 +6,7 @@
         <title>공차_kiosk_administrator_menu_list</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="flexbox.css">
-        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'style.css')}}">
     </head>
     <body>
 
@@ -140,7 +140,7 @@
                   
                 </div>
                 <div class="modal-footer">
-                  <button type="button" class="btn" data-dismiss="modal" id="add_ok_btn">OK</button>
+                  <button type="button" class="btn" data-dismiss="modal" id="add_ok_btn" >OK</button>
                 </div>
               </div>
             </div>
@@ -228,6 +228,11 @@
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-        <script src="menu_change.js"></script>
+        <script src="{{url_for('static', filename='menu_change.js')}}"></script>
+
+        <!-- ajax download -->
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.js"></script>
+<script>window.jQuery || document.write('<script src="{{url_for('static', filename='jquery.js') }}">\x3C/script>')</script>
+<script type=text/javascript>
     </body>
     </html>

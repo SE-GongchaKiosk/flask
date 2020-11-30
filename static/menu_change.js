@@ -324,9 +324,13 @@ add_ok_btn.addEventListener('click', ()=>{
         price:input_priceEl.value,ice:input_iceEl.checked, hot:input_hotEl.checked, 
         topping_number:input_toppingEl.value, is_waiting:input_waitingEl.checked, is_output_kitchen:input_kitchenEl.checked};
         menu_data.push(new_obj);//메뉴에 추가하기
+        add_menu();
+
         selectCategory();//메뉴 업데이트
     }
 });
+
+
 
 modify_ok_btn.addEventListener('click', ()=>{
     if(checkMenu("modify") &&checkSelcetedMenu("modify")){
@@ -336,6 +340,7 @@ modify_ok_btn.addEventListener('click', ()=>{
             price:input_priceEl.value,ice:input_iceEl.checked, hot:input_hotEl.checked, 
             topping_number:input_toppingEl.value, is_waiting:input_waitingEl.checked, is_output_kitchen:input_kitchenEl.checked};
         console.log(menu_data);
+
         selectCategory();//메뉴업데이트
     }
 });
@@ -388,4 +393,42 @@ category_remove_ok_btn.addEventListener('click', ()=>{
     }
 });
 
+function add_menu(){
+    // let category = $("#input_category_add").val();
+    let category = $(this).attr("input_category_add");
+    console.log(category)
+    let menu = $("#input_menu").val();
+    let price = $("#input_price").val();
+    let category = $("#input_category_add").val();
+    Boolean kitchen = $("#input_kitchen").val();
+    Boolean waiting = $("#input_waiting").val();
+    Boolean ice = $("#input_ice").val();
+    Boolean hot = $("#input_hot").val();
+    let topping = $("#input_topping").val()
+    console.log("hi");
+
+
+    $.ajax({
+        type: "POST",
+        url: "{{url_for('add_menu')}}",
+        data: {
+            category_give : category,
+            menu_give : menu,
+            price_give : price,
+            category_give : category,
+            kitchen_give : kitchen,
+            waiting_give : waiting,
+            ice_give : ice,
+            hot_give : hot,
+            topping_give : topping
+        },
+        success: function(response){
+           if(response['result'] == "success"){
+               console.log("성공!");
+            alert(response['msg']);
+            window.location.reload();
+           }
+        }
+    })
+}
 
