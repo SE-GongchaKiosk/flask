@@ -75,19 +75,14 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="../static/Payment.js"></script>
         <script>
-            var bIs_confirm = false
-            var nCount_success = 0;
-            var Modal_timer;
-            var Timeout_timer
-
             document.addEventListener("DOMContentLoaded", function(){
                 Timeout_timer = setTimeout(() => {
-                    location.href = './payment_error.html'
+                    window.localStorage.setItem('Err_code', '1');
+                    location.href = './payment_error.html';
                 }, 15000);
             });
 
             function Modal_set_timer() {
-                bIs_confirm = true;
                 clearTimeout(Timeout_timer)
                 Modal_timer = setTimeout(() => {
                     location.href = './stamp_success.html'
@@ -95,13 +90,13 @@
             }
 
             function restart(id,url) {
-                bIs_confirm = false
                 clearTimeout(Modal_timer)
                 var img = document.getElementById(id);
                 img.src = "";
                 img.src = url;
                 Timeout_timer = setTimeout(() => {
-                    location.href = './payment_error.html'
+                    window.localStorage.setItem('Err_code', '1');
+                    location.href = './payment_error.html';
                 }, 15000);
             }
         </script>

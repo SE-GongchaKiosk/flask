@@ -3,7 +3,7 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>적립 성공</title>
+        <title>결제 실패</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
         <link rel="stylesheet" href="../static/Payment.css">
     </head>
@@ -22,5 +22,11 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
         <script src="../static/Payment.js"></script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() {
+                Err_display();
+                setTimeout(function() {location.href = './payment_selection.html'}, 5000);
+            });
+        </script>
     </body>
 </html>

@@ -24,3 +24,18 @@ function cancel() {
     }
     return location.href = '../templates/payment_selection.html';
 }
+
+function Err_display() {
+    var Errcode = localstorage.getItem('Err_code')
+    var Err_type = '사유: '
+    switch(Errcode) {
+        case '1':
+            Err_type += '결제 시간 초과';
+            break;
+        default:
+            Err_type += '기기 오류';
+            break;
+    }
+    document.getElementById('Reason_failure').innerText = Err_type;
+    return;
+}
