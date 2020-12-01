@@ -1,2 +1,0 @@
-Managing Software Engineering Project
-
